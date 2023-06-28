@@ -1,5 +1,5 @@
-data segment
-    INDICATOR equ 237 ;COMES BEFORE A LONE CHAR (237 IN ASCII IS THE COMMONLY ACCEPTED INDICATOR)
+data segment 
+    INDICATOR equ 0 ;COMES BEFORE A LONE CHAR (0 IS AN ACCEPTED INDICATOR)
     namelimit equ 24 
     size db ?  
     EF dw 0
@@ -644,8 +644,6 @@ start:
     mov bx, pointer ; pointer points to the first available spot, not the last taken one, so we need to decrease bx by 1 so it represents the address of the last item
     print2:
     mov ax, [bx]
-    cmp ah, INDICATOR
-    JZ indicator_found
     mov al, ah  
     xor ah, ah
     push ax 
@@ -654,17 +652,6 @@ start:
     mov ah, 2 
     mov dl, al  
     int 21h
-    jmp bonanza           
-    indicator_found:
-    push ax
-    mov dl, ah
-    mov ah, 2
-    int 21h
-    pop ax
-    mov ah, 2 
-    mov dl, al
-    int 21h
-    bonanza:
     cmp cx, 1 
     jz dont_decrease
     dec cx        

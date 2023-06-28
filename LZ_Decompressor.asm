@@ -1,5 +1,5 @@
 data segment
-    INDICATOR equ 237
+    INDICATOR equ 0
     namelimit equ 24
     file_handle dw ?
     decompressed_size dw ?
